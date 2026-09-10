@@ -38,7 +38,7 @@ const AdicionarTarefa = (e) => {
   setCampo('');     // Limpa o campo 
   setDescricao('');
   setData ('');
-  setPrioridade ('');
+  setPrioridade ('Baixa');
 }
 
 
@@ -63,7 +63,26 @@ const RemoverTarefa = (id) => {
           placeholder='Título da Tarefa'
         />
 
-      
+        <textarea value={descricao} onChange={(e)=>setDescricao(e.target.value)}
+            className='text-desc'
+            placeholder='Descrição'
+        />
+
+        <div className='form-linha'>
+
+            <input type='date' value={data} onChange={(e)=>setData(e.target.value)}
+            className='data'
+            />
+
+            <select value={prioridade} onChange={(e)=>setPrioridade(e.target.value)}
+                className='select-prioridade'
+            >
+                <option value="Baixa">Baixa</option>
+                <option value="Média">Média</option>
+                <option value="Alta">Alta</option>
+            </select>
+
+        </div>
 
         <button type='submit' className='add'> 
           +
@@ -76,13 +95,29 @@ const RemoverTarefa = (id) => {
         {tarefas.map((tarefa)=> (
           <li key={tarefa.id} className='item'>
 
-            <span className='text-[#5a5a5af7]'>{tarefa.texto} </span>
+            <div className='item-header'> 
+                <span className='item-text'>{tarefa.texto} </span>
+                <span className='item-prioriade'>{tarefa.prioridade} </span>
+            </div>
 
-            <button onClick={()=>RemoverTarefa(tarefa.id)}
-            className='delete'>  
-              x
-            </button>
+            {tarefa.descricao && (<p className='item-descricao'>{tarefa.descricao} </p>)}
 
+            <div className='item-footer'>
+                {tarefa.data ? (
+                    <span className='item-data'> 
+                        Expira em: {new Date(tarefa.data + 'T00:00:00').toLocaleDateString('pt-BR')}
+                    </span>
+                ) : (
+                    <span className='item-sem-data'> Sem Data </span>
+                )}
+
+                <button onClick={()=>RemoverTarefa(tarefa.id)}
+                className='delete'>  
+                x
+                </button>
+
+            </div>
+            
           </li>
         ))}
 
