@@ -10,7 +10,9 @@ const [tarefas,setTarefas]=useState(()=>{
 
 
 const [campo,setCampo]=useState("");
-
+const [descricao,setDescricao]=useState("");
+const [data,setData]=useState("");
+const [prioridade,setPrioridade]=useState("");
 
 // Hook - useEffect - Realiza o efeito colateralm nesse exemplo vai mostrar a tarefa adicionada em tempo real
 useEffect(()=>{
@@ -27,10 +29,16 @@ const AdicionarTarefa = (e) => {
   const novaTarefa = { 
     id: Date.now(),     // gera Id automático
     texto: campo,
+    descricao: descricao,
+    data: data,
+    prioridade: prioridade,
 
   }
   setTarefas([...tarefas,novaTarefa]);      // "..." (spread) = Adiciona nova tarefa, mantendo as tarefas anteriores 
   setCampo('');     // Limpa o campo 
+  setDescricao('');
+  setData ('');
+  setPrioridade ('');
 }
 
 
