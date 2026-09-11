@@ -1,5 +1,6 @@
-import {useState, useEffect} from 'react'
-import '../css/style.css'
+import {useState, useEffect} from 'react';
+import '../css/style.css';
+import AlternarEstado from './AlternarEstado';
 
 const Tarefas = () => {
 // Hook - usaState - Manipula o estado da variável
@@ -13,6 +14,7 @@ const [campo,setCampo]=useState("");
 const [descricao,setDescricao]=useState("");
 const [data,setData]=useState("");
 const [prioridade,setPrioridade]=useState("");
+const [filtro, setFiltro] =useState("todos")
 
 // Hook - useEffect - Realiza o efeito colateralm nesse exemplo vai mostrar a tarefa adicionada em tempo real
 useEffect(()=>{
@@ -32,6 +34,7 @@ const AdicionarTarefa = (e) => {
     descricao: descricao,
     data: data,
     prioridade: prioridade,
+    concluido: false,
 
   }
   setTarefas([...tarefas,novaTarefa]);      // "..." (spread) = Adiciona nova tarefa, mantendo as tarefas anteriores 
@@ -48,30 +51,53 @@ const RemoverTarefa = (id) => {
   const apagarTarefa = tarefas.filter((tarefa)=> tarefa.id !== id)     // filter = copia e organiza
   setTarefas(apagarTarefa);
 }
+
+const AlternarConclusao = (id) => {
+  const tarefaAtualizada = tarefas.map((tarefa) =>
+    tarefa.id === id
+      ? {...tarefa, concluido: !tarefa.concluido}
+      : tarefa
+  );
+  setTarefas(tarefaAtualizada)
+};
+
+const tarefasFiltradas = tarefas.filter((tarefa) => {
+  if (filtro === 'pendente') {
+    return !tarefa.concluido;
+  }
+  if (filtro === 'concluidos') {
+    return tarefa.concluido;
+  }
+  return true;
+});
     
   return (
     <div className='container'> 
 
-      <h1 className='title'> 
-        To-Do 
+      <h1 className='titulo'> 
+        Genrenciador de Tarefas 
       </h1>
 
-      <form onSubmit={AdicionarTarefa} className='form'> 
+      <form onSubmit={AdicionarTarefa} className='form-todo'> 
 
-        <input type='text' value={campo} onChange={(e)=>setCampo(e.target.value)}
-          className='input'
-          placeholder='Título da Tarefa'
-        />
+        <div className='form-linha-top'>
 
-        <textarea value={descricao} onChange={(e)=>setDescricao(e.target.value)}
-            className='text-desc'
-            placeholder='Descrição'
-        />
+            <input type='text' value={campo} onChange={(e)=>setCampo(e.target.value)}
+            className='input-todo'
+            placeholder='Título da Tarefa'
+            />
 
-        <div className='form-linha'>
+            <textarea value={descricao} onChange={(e)=>setDescricao(e.target.value)}
+                className='text-desc'
+                placeholder='Descrição'
+            />
+
+        </div>
+
+        <div className='form-linha-bottom'>
 
             <input type='date' value={data} onChange={(e)=>setData(e.target.value)}
-            className='data'
+            className='input-data'
             />
 
             <select value={prioridade} onChange={(e)=>setPrioridade(e.target.value)}
@@ -82,22 +108,31 @@ const RemoverTarefa = (id) => {
                 <option value="Alta">Alta</option>
             </select>
 
+            <button type='submit' className='btn-adicionar'> 
+            +
+            </button>
+
         </div>
 
-        <button type='submit' className='add'> 
-          +
-        </button>
 
       </form>
       
-      <ul className='space-y-3'>
+      <button className=''></button>
+      <button ></button>
+      <button ></button>
+
+      <ul className='lista-tarefa'>
 
         {tarefas.map((tarefa)=> (
-          <li key={tarefa.id} className='item'>
-
+          <li key={tarefa.id} className='item-tarefa'>
+            
             <div className='item-header'> 
-                <span className='item-text'>{tarefa.texto} </span>
-                <span className='item-prioriade'>{tarefa.prioridade} </span>
+                <AlternarEstado
+                  concluido={tarefa.concluido}
+                  alternar={() => AlternarConclusao(tarefa.id)}
+                />
+                <span className={`item-text ${tarefa.concluido ? 'concluido' : ''}`}>{tarefa.texto} </span>
+                <span className='item-prioridade'>{tarefa.prioridade} </span>
             </div>
 
             {tarefa.descricao && (<p className='item-descricao'>{tarefa.descricao} </p>)}
@@ -112,7 +147,7 @@ const RemoverTarefa = (id) => {
                 )}
 
                 <button onClick={()=>RemoverTarefa(tarefa.id)}
-                className='delete'>  
+                className='btn-excluir'>  
                 x
                 </button>
 
@@ -123,7 +158,7 @@ const RemoverTarefa = (id) => {
 
       </ul>
 
-        {tarefas.length === 0 && <p className='text-center text-[#f427b0c9] italic mt-4'> Nenhuma Tarefa Salva </p>}
+        {tarefas.length === 0 && <p className='mensagem-vazia'> Nenhuma Tarefa Salva </p>}
 
     </div>
   )
