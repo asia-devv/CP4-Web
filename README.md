@@ -63,3 +63,16 @@ npm run dev
 |Leonardo Danie|574142|
 |Matheus Tamatay|572842|
 |Vinycius Lu|569300|
+
+---
+<div style='display: flex; align-items: center; gap: 10px'>
+  <a href='https://github.com/asia-devv/CP4-Web'>
+    <img src="https://img.shields.io/badge/Repositório-000?style=for-the-badge&logo=github&logoColor=white">
+    <a href='https://github.com/asia-devv/CP4-Web' align-items='center'>
+    https://github.com/asia-devv/CP4-Web
+    </a>
+  </a>
+</div>
+
+  
+
