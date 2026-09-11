@@ -14,7 +14,7 @@ const [campo,setCampo]=useState("");
 const [descricao,setDescricao]=useState("");
 const [data,setData]=useState("");
 const [prioridade,setPrioridade]=useState("Baixa");
-const [filtro, setFiltro] =useState("todas")
+const [filtro, setFiltro] =useState("pendentes")
 
 // Hook - useEffect - Realiza o efeito colateralm nesse exemplo vai mostrar a tarefa adicionada em tempo real
 useEffect(()=>{
@@ -74,10 +74,11 @@ const tarefasFiltradas = tarefas.filter((tarefa) => {
 });
     
   return (
+
     <div className='container'> 
 
       <h1 className='titulo'> 
-        Genrenciador de Tarefas 
+        Gerenciador de Tarefas 
       </h1>
 
       <form onSubmit={AdicionarTarefa} className='form-todo'> 
@@ -118,9 +119,9 @@ const tarefasFiltradas = tarefas.filter((tarefa) => {
       </form>
 
       <div className='container-btn'>
-        <button className='btn-filtro' onClick={() => setFiltro('pendentes')} >Pendentes</button>
-        <button className='btn-filtro' onClick={() => setFiltro('concluidas')} >Concluídas</button>
-        <button className='btn-filtro' onClick={() => setFiltro('todas')} >Todas</button>
+        <button className={`btn-filtro ${filtro === 'pendentes' ? 'ativo' : ''}`} onClick={() => setFiltro('pendentes')} >Pendentes</button>
+        <button className={`btn-filtro ${filtro === 'concluidas' ? 'ativo' : ''}`} onClick={() => setFiltro('concluidas')} >Concluídas</button>
+        <button className={`btn-filtro ${filtro === 'todas' ? 'ativo' : ''}`} onClick={() => setFiltro('todas')} >Todas</button>
       </div>
 
       <ul className='lista-tarefa'>

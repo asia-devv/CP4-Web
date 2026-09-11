@@ -7,8 +7,9 @@
 
     --bg-body: #FAF9F6;
     --bg-container: #fff;
-    --primary: #1159cb;
-    --primary-hover: #2B4BA6;
+    --primary: #2196F3;
+    --primary-hover: #90CAF9;
+    --secondary-hover: #0D47A1;
     --blue: #EBF0FF;
 
     --text-main: #0F172A;
@@ -42,7 +43,7 @@ body {
     background-color: var(--bg-container);
     width: 100%;
     max-width: 50rem;
-    margin:  2.5rem auto 0 auto;
+    margin:  2rem auto 1rem auto;
     padding: 1rem;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(65, 105, 225, 0.08), 0 4px 6px rgba(0, 0, 0, 0.02);
@@ -165,6 +166,11 @@ body {
     transform: translateX(2px);
 }
 
+input[type="checkbox"] {
+  transform: scale(1.5); 
+  margin: 5px; 
+}
+
 .item-header {
     display: flex;
     align-items: center;
@@ -185,7 +191,7 @@ body {
 }
 
 .item-descricao {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     word-break: break-word;
     margin: 0;
 }
@@ -266,4 +272,10 @@ body {
 .btn-filtro:hover {
     background-color: var(--primary-hover);
     transform: translateY(-2px);
+}
+
+.ativo {
+    background-color: var(--secondary-hover);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px var(--secondary-hover);
 }
