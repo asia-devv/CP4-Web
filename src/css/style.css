@@ -63,7 +63,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .form-linha-top,
@@ -200,12 +200,12 @@ body {
 }
 
 .item-data {
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     color: var(--text-data);
 }
 
 .item-sem-data {
-    font-size: 1.15rem;   
+    font-size: 1.25rem;   
     color: var(--text-data);
     font-style: italic;
 }
@@ -228,6 +228,7 @@ body {
 }
 
 .mensagem-vazia {
+    font-size: 2.5rem;
     text-align: center;
     font-style: italic;
     margin-top: 1rem;
@@ -237,4 +238,32 @@ body {
 .concluido {
     text-decoration: line-through;
     opacity: 0.5;
+}
+
+.container-btn {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 0.8rem;
+    margin-left: 0.75rem;
+}
+
+.btn-filtro {
+    background-color: var(--primary);
+    color: var(--white);
+    width: 7rem;
+    height: 2.5rem;
+    border-radius: 10px;
+    font-size: 2rem;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-filtro:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
 }

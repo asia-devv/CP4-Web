@@ -13,8 +13,8 @@ const [tarefas,setTarefas]=useState(()=>{
 const [campo,setCampo]=useState("");
 const [descricao,setDescricao]=useState("");
 const [data,setData]=useState("");
-const [prioridade,setPrioridade]=useState("");
-const [filtro, setFiltro] =useState("todos")
+const [prioridade,setPrioridade]=useState("Baixa");
+const [filtro, setFiltro] =useState("todas")
 
 // Hook - useEffect - Realiza o efeito colateralm nesse exemplo vai mostrar a tarefa adicionada em tempo real
 useEffect(()=>{
@@ -52,6 +52,7 @@ const RemoverTarefa = (id) => {
   setTarefas(apagarTarefa);
 }
 
+// ALTERNA O ESTADO DA TAREFA
 const AlternarConclusao = (id) => {
   const tarefaAtualizada = tarefas.map((tarefa) =>
     tarefa.id === id
@@ -61,11 +62,12 @@ const AlternarConclusao = (id) => {
   setTarefas(tarefaAtualizada)
 };
 
+// EXIBE AS TAREFAS DE ACORDO O ESTADO EM QUE SE ENCONTRA
 const tarefasFiltradas = tarefas.filter((tarefa) => {
-  if (filtro === 'pendente') {
+  if (filtro === 'pendentes') {
     return !tarefa.concluido;
   }
-  if (filtro === 'concluidos') {
+  if (filtro === 'concluidas') {
     return tarefa.concluido;
   }
   return true;
@@ -113,17 +115,17 @@ const tarefasFiltradas = tarefas.filter((tarefa) => {
             </button>
 
         </div>
-
-
       </form>
-      
-      <button className=''></button>
-      <button ></button>
-      <button ></button>
+
+      <div className='container-btn'>
+        <button className='btn-filtro' onClick={() => setFiltro('pendentes')} >Pendentes</button>
+        <button className='btn-filtro' onClick={() => setFiltro('concluidas')} >Concluídas</button>
+        <button className='btn-filtro' onClick={() => setFiltro('todas')} >Todas</button>
+      </div>
 
       <ul className='lista-tarefa'>
 
-        {tarefas.map((tarefa)=> (
+        {tarefasFiltradas.map((tarefa)=> (
           <li key={tarefa.id} className='item-tarefa'>
             
             <div className='item-header'> 
